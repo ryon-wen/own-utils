@@ -1,4 +1,4 @@
-module common
+module github.com/ryon-wen/own-utils
 
 go 1.20
 
