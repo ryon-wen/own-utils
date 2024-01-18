@@ -1,4 +1,4 @@
-module github.com/ryon-wen/own-utils/v1
+module own-utils
 
 go 1.20
 
