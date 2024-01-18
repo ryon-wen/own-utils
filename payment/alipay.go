@@ -9,27 +9,33 @@ import (
 
 var client *alipay.Client
 
-func InitAliPay(appId, privateKey, aliPublicKey string) {
+type AliPay struct {
+	AppID        string `json:"app_id"`
+	PrivateKey   string `json:"private_key"`
+	AliPublicKey string `json:"ali_public_key"`
+	NotifyURL    string `json:"notify_url"`
+}
+
+func InitAliPay(pay *AliPay) {
 	var err error
-	client, err = alipay.New(appId, privateKey, false)
+	client, err = alipay.New(pay.AppID, pay.PrivateKey, false)
 	if err != nil {
 		panic(err)
 	}
-	err = client.LoadAliPayPublicKey(aliPublicKey)
+	err = client.LoadAliPayPublicKey(pay.AliPublicKey)
 	if err != nil {
 		panic(err)
 	}
 }
 
-func GeneralPayment(notifyURL, subject, outTradeNo, totalAmount string) (string, error) {
-	var p = alipay.TradePagePay{}
-	p.NotifyURL = notifyURL
+func GeneralPayment(p alipay.TradePagePay) (string, error) {
+	//var p = alipay.TradePagePay{}
+	//p.NotifyURL = notifyURL
 	//p.ReturnURL = "http://xxx"
-	p.Subject = subject
-	p.OutTradeNo = outTradeNo
-	p.TotalAmount = totalAmount
-	p.ProductCode = "FAST_INSTANT_TRADE_PAY"
-
+	//p.Subject = subject
+	//p.OutTradeNo = outTradeNo
+	//p.TotalAmount = totalAmount
+	//p.ProductCode = "FAST_INSTANT_TRADE_PAY"
 	var url, err = client.TradePagePay(p)
 	if err != nil {
 		return "", err
@@ -43,7 +49,6 @@ func GeneralPayment(notifyURL, subject, outTradeNo, totalAmount string) (string,
 func NotifyPayment(values url.Values) (string, uint32, error) {
 	var notification, err = client.DecodeNotification(values)
 	if err != nil {
-		// 错误处理
 		fmt.Println(err)
 		return "", 0, err
 	}

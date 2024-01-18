@@ -9,10 +9,8 @@ import (
 )
 
 type Nacos struct {
-	IpAddr      string
+	IpAddr      string // 127.0.0.1
 	Port        uint64 // 8848
-	Scheme      string // "http"
-	ContextPath string // "/nacos"
 	NamespaceId string
 	DataId      string
 	Group       string
@@ -30,10 +28,8 @@ func InitNacos(c *Nacos) (string, error) {
 	}
 	serverConfigs := []constant.ServerConfig{
 		{
-			Scheme:      c.Scheme,
-			ContextPath: c.ContextPath,
-			IpAddr:      c.IpAddr,
-			Port:        c.Port,
+			IpAddr: c.IpAddr,
+			Port:   c.Port,
 		},
 	}
 	// Another way of create config client for dynamic configuration (recommend)
