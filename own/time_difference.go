@@ -1,4 +1,4 @@
-package timelag
+package own
 
 import (
 	"time"

@@ -1,4 +1,4 @@
-package logger
+package own
 
 import "go.uber.org/zap"
 
@@ -8,4 +8,5 @@ func InitZap() {
 		panic("init zap failed: " + err.Error())
 	}
 	zap.ReplaceGlobals(logger)
+
 }

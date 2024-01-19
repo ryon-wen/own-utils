@@ -1,7 +1,6 @@
-package payment
+package own
 
 import (
-	"fmt"
 	"net/url"
 
 	"github.com/smartwalle/alipay/v3"
@@ -28,7 +27,7 @@ func InitAliPay(pay *AliPay) {
 	}
 }
 
-func GeneralPayment(p alipay.TradePagePay) (string, error) {
+func GeneralPayURL(p alipay.TradePagePay) (string, error) {
 	//var p = alipay.TradePagePay{}
 	//p.NotifyURL = notifyURL
 	//p.ReturnURL = "http://xxx"
@@ -46,22 +45,6 @@ func GeneralPayment(p alipay.TradePagePay) (string, error) {
 	return payURL, nil
 }
 
-func NotifyPayment(values url.Values) (string, uint32, error) {
-	var notification, err = client.DecodeNotification(values)
-	if err != nil {
-		fmt.Println(err)
-		return "", 0, err
-	}
-	switch notification.TradeStatus {
-	case alipay.TradeStatusWaitBuyerPay: //（交易创建，等待买家付款）
-		return notification.OutTradeNo, 0, nil
-	case alipay.TradeStatusClosed: //（未付款交易超时关闭，或支付完成后全额退款）
-		return notification.OutTradeNo, 1, nil
-	case alipay.TradeStatusSuccess: //（交易支付成功）
-		return notification.OutTradeNo, 2, nil
-	case alipay.TradeStatusFinished: //（交易结束，不可退款）
-		return notification.OutTradeNo, 3, nil
-	default:
-		return "", 0, fmt.Errorf("error request")
-	}
+func DecodePayNotify(values url.Values) (*alipay.Notification, error) {
+	return client.DecodeNotification(values)
 }

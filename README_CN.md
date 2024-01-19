@@ -1,19 +1,19 @@
-# Thanks for using this project !
+# 感谢使用！
 
-English | [简体中文](https://github.com/ryon-wen/own-utils/blob/main/README_CN.md)
+简体中文 | [English](https://github.com/ryon-wen/own-utils/blob/main/README.md)
 
-## Installation
+## 安装
 
-Use `go get` to install SDK：
+使用`go get`安装 SDK：
 
 ```shell
 $ go get -u github.com/ryon-wen/own-utils@v1.0.3
 ```
 
-## Docker Run (example)
-###### Attention: `latest` tag is the image's version
+## Docker 运行示例
+###### 注意：`latest` 标签是镜像的版本
 
-#### MySQL: (`xxx` is your password)
+#### MySQL: (`xxx`是你的密码)
 
 ```shell
 $ docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=xxx -d mysql:latest
@@ -29,83 +29,83 @@ $ docker run --name redis -p 6379:6379 -d redis:latest
 ```shell
 $ docker run --name nacos -e MODE=standalone -e JVM_XMS=512m -e JVM_XMX=512m -e JVM_XMN=256m -p 8848:8848 -p 9848:9848 -p 9849:9849 -d nacos/nacos-server:latest
 ```
-Only for `macOS (Apple Silicon)`
+对于`macOS (Apple Silicon)`请使用下方命令
 ```shell
 $ docker run --name nacos -e MODE=standalone -e JVM_XMS=512m -e JVM_XMX=512m -e JVM_XMN=256m -p 8848:8848 -p 9848:9848 -p 9849:9849 -d nacos/nacos-server-m1:2.0.3
 ```
 
 #### ElasticSearch:
-1. Install `elasticsearch:7.17.6` and run
+1. 安装`elasticsearch:7.17.6`并运行
 ```shell
 $ docker run --name elasticsearch -d -e ES_JAVA_OPTS="-Xms512m -Xmx512m" -e "discovery.type=single-node" -p 9200:9200 -p 9300:9300 elasticsearch:7.17.6
 ```
-2. Install `kibana:7.17.6` and run
+2. 安装`kibana:7.17.6`并运行
 ```shell
 $ docker run -d --name kibana -p 5601:5601 --link elasticsearch -e "ELASTICSEARCH_URL=http://127.0.0.1:9200" kibana:7.17.6
 ```
-3. Entering the `kibana` container
+3. 进入`kibana`容器
 ```shell
 $ docker exec -u 0 -it kibana /bin/bash
 ```
-4. Install `vim` into the container
+4. 在容器中安装`vim`编辑器
 ```shell
 $ apt-get update
 $ apt-get install vim
 ```
-5. Edit `kibana.yml` in the container
+5. 编辑容器中的`kibana.yml`配置文件
 ```shell
 $ vi /opt/kibana/config/kibana.yml
 ```
-6. Press `insert` key then copy to the last row
+6. 按下`insert`(mac请按`i`)键后，将下方命令拷贝到配置文件的最后一行
 ```shell
 $ i18n.locale: "zh-CN"
 ```
-7. Press `ESC` to exit edit then input `:wq` and Press `Enter` to save the change, at last input `exit` to exit the container
+7. 按下`ESC`键结束编辑，然后输入`:wq`再按下`Enter`键保存更改，最后输入`exit`退出容器
 
-8. Download [elasticsearch-analysis-ik-7.17.6.zip](https://share.feijipan.com/s/3SUofVC7)
+8. 下载 [elasticsearch-analysis-ik-7.17.6.zip](https://share.feijipan.com/s/3SUofVC7) 到本地
 
-9. Copy the downloaded file into the elasticsearch container
-   (`xxx` is your file path)
+9. 将下载好的文件拷贝到`elasticsearch`容器中
+   (`xxx`是你的文件路径)
 ```shell
 $ docker cp xxx elasticsearch:/usr/share/elasticsearch/plugins
 ```
 
-10. Entering the `elasticsearch` container
+10. 进入`elasticsearch`容器
 ```shell
 $ docker exec -it elasticsearch bash
 ```
 
-11. Entering the `plugins` directory
+11. 进入`plugins`目录
 ```shell
 $ cd plugins/
 ```
 
-12. Create new folder named `ik`
+12. 新建名为`ik`的文件夹
 ```shell
 $ mkdir ik
 ```
 
-13. Move the `elasticsearch-analysis-ik-7.17.6.zip` file to the `ik` directory
+13. 将`elasticsearch-analysis-ik-7.17.6.zip`文件复制到`ik`目录中
 ```shell
 $ mv elasticsearch-analysis-ik-7.17.6.zip ik/
 ```
 
-14. Entering the `ik` directory
+14. 进入`ik`目录
 ```shell
 $ cd ik/
 ```
 
-15. Unzip the zip file
+15. 解压压缩文件
 ```shell
 $ unzip elasticsearch-analysis-ik-7.17.6.zip
 ```
 
-16. Delete the zip file
+16. 删除压缩文件
 ```shell
 $ rm -rf elasticsearch-analysis-ik-7.17.6.zip
 ```
 
-17. Exit the container and restart `elasticsearch` and `kibana`
+17. 输入`exit`退出容器，随后先重启`elasticsearch`容器，再重启`kibana`容器
 ```shell
 $ exit
 $ docker restart elasticsearch
