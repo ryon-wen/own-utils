@@ -21,7 +21,6 @@ func HolidayTimeDifference(interval int) {
 	tk := toolbox.NewTask("tk", fmt.Sprintf("0/%d * * * * *", interval), getTime)
 	toolbox.AddTask(tk.Taskname, tk)
 	toolbox.StartTask()
-	defer toolbox.StopTask()
 }
 
 func getTime() error {
