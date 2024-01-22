@@ -25,7 +25,7 @@ func HolidayTimeDifference(interval int) {
 
 func getTime() error {
 	now := time.Now()
-	holiday := time.Date(2024, 1, 27, 12, 0, 0, 0, now.Location())
+	holiday := time.Date(2024, 1, 25, 12, 0, 0, 0, now.Location())
 	difference := time.Unix(holiday.Unix()-now.Unix(), 0).UTC()
 	day := difference.Day() - 1
 	hour := difference.Hour()
