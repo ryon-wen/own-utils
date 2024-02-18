@@ -1,0 +1,38 @@
+version: '3'
+services:
+  elasticsearch:
+    image: elasticsearch:7.17.6
+    container_name: elk_es
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - cluster.name=elasticsearch
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - /Users/erwen/Go/src/own-utils/docker/elk/elasticsearch/plugins:/usr/share/elasticsearch/plugins
+      - /Users/erwen/Go/src/own-utils/docker/elk/elasticsearch/data:/usr/share/elasticsearch/data
+      - /Users/erwen/Go/src/own-utils/docker/elk/elasticsearch/logs:/usr/share/elasticsearch/logs
+
+  kibana:
+    image: kibana:7.17.6
+    container_name: elk_kibana
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    environment:
+      I18N_LOCALE: zh-CN
+    volumes:
+      - /Users/erwen/Go/src/own-utils/docker/elk/kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.17.6
+    container_name: elk_logstash
+    ports:
+      - "5044:5044"
+    volumes:
+      - /Users/erwen/Go/src/own-utils/docker/elk/logstash/config:/usr/share/logstash/config
+    depends_on:
+      - elasticsearch
