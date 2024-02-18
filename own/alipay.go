@@ -35,13 +35,13 @@ func GeneralPayURL(p alipay.TradePagePay) (string, error) {
 	//p.OutTradeNo = outTradeNo
 	//p.TotalAmount = totalAmount
 	//p.ProductCode = "FAST_INSTANT_TRADE_PAY"
-	var url, err = client.TradePagePay(p)
+	var res, err = client.TradePagePay(p)
 	if err != nil {
 		return "", err
 	}
 
 	// generate payURL string
-	var payURL = url.String()
+	var payURL = res.String()
 	return payURL, nil
 }
 

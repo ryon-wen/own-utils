@@ -7,7 +7,7 @@
 使用`go get`安装 SDK：
 
 ```shell
-$ go get -u github.com/ryon-wen/own-utils@v1.0.3
+$ go get -u github.com/ryon-wen/own-utils@latest
 ```
 
 ## Docker 运行示例

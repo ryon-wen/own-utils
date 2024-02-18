@@ -47,3 +47,15 @@ func InitModel(sql *MySQL) *gorm.DB {
 	zap.S().Debug("Successfully connected to MySQL database!")
 	return db
 }
+
+// Todo: auto rollback or commit
+//func AutoTx(txF func(tx *gorm.DB) error) error {
+//	tx := db.Begin()
+//	err := txF(tx)
+//	if err != nil {
+//		tx.Rollback()
+//		return err
+//	}
+//	tx.Commit()
+//	return nil
+//}

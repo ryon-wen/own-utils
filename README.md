@@ -7,7 +7,7 @@ English | [简体中文](https://github.com/ryon-wen/own-utils/blob/main/README_
 Use `go get` to install SDK：
 
 ```shell
-$ go get -u github.com/ryon-wen/own-utils@v1.0.3
+$ go get -u github.com/ryon-wen/own-utils@latest
 ```
 
 ## Docker Run (example)
