@@ -9,9 +9,9 @@ import (
 )
 
 type ElasticSearch struct {
-	Host     string
-	Port     int
-	IndexKey string
+	Host     string `json:"host"`
+	Port     int    `json:"port"`
+	IndexKey string `json:"index_key"`
 }
 
 var esUrl string
