@@ -1,0 +1,19 @@
+{
+    "mysql":{
+        "user": "root",
+        "password": "pangjunwen",
+        "host": "121.43.119.198",
+        "port":3306,
+        "database": "zg6"
+    },
+    "redis":{
+        "host": "127.0.0.1",
+        "port": 6379,
+        "db": 0
+    },
+    "es":{
+        "host":"localhost",
+        "port":9200,
+        "index_key":"goods"
+    }
+}

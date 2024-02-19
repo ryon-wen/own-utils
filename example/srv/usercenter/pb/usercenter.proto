@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package pb;
+option go_package="./pb";
+
+service UserCenterService {
+  rpc Create(CreateReq) returns (Empty);
+  rpc Update(UpdateReq) returns (Empty);
+  rpc Get(GetReq) returns (GetResp);
+  rpc Delete(DeleteReq) returns (Empty);
+}
+
+message User {
+  int64 ID = 10;
+  string Nickname = 20;
+  string Mobile = 30;
+  string Password = 40;
+}
+
+message CreateReq {
+  User user = 10;
+}
+
+message UpdateReq {
+  User user = 10;
+}
+
+message GetReq {
+  int64 ID = 10;
+}
+
+message GetResp {
+  User user = 10;
+}
+
+message DeleteReq {
+  int64 ID = 10;
+}
+
+message Empty {}

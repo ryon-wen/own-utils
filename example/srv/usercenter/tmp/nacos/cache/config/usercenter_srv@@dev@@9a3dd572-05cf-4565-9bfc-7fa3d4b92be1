@@ -1,0 +1,10 @@
+{
+    "MySQL":{
+        "Datasource": "root:pangjunwen@tcp(121.43.119.198:3306)/zg6?loc=Local&parseTime=True&charset=utf8mb4"
+    },
+    "Redis":{
+        "Host": "127.0.0.1",
+        "Port": 6379,
+        "DB": 0
+    }
+}

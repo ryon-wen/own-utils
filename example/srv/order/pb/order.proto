@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package pb;
+option go_package="./pb";
+
+service OrderService {
+  rpc Create           (CreateReq)           returns (OrderEmpty);
+  rpc CreateBack       (CreateReq)           returns (OrderEmpty);
+  rpc UpdateOrderState (UpdateOrderStateReq) returns (OrderEmpty);
+}
+
+message CreateReq {
+  string OrderNO     = 10;
+  int64  UID         = 20;
+  string GoodsList   = 30;
+  double TotalAmount = 40;
+  int64  Status      = 50;
+}
+
+message UpdateOrderStateReq {
+  string OrderNO = 10;
+  int64  Status  = 20;
+}
+
+message OrderEmpty {
+
+}

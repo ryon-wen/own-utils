@@ -1,0 +1,16 @@
+Name: order.rpc
+ListenOn: 0.0.0.0:8082
+Nacos:
+  IpAddr: 127.0.0.1
+  Port: 8848
+  ContextPath: /nacos
+  Scheme: http
+  NamespaceId: 9a3dd572-05cf-4565-9bfc-7fa3d4b92be1
+  DataId: order_srv
+  Group: dev
+#链路追踪
+Telemetry:
+  Name: order-rpc
+  Endpoint: http://jaeger:14268/api/traces
+  Sampler: 1.0
+  Batcher: jaeger

@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package pb;
+option go_package="./pb";
+
+service GoodsService {
+  rpc Add             (AddReq)         returns (GoodsEmpty);
+  rpc Update          (UpdateReq)      returns (GoodsEmpty);
+  rpc Get             (GetReq)         returns (GetResp);
+  rpc Delete          (DeleteReq)      returns (GoodsEmpty);
+  rpc Find            (FindReq)        returns (FindResp);
+  rpc FindByIds       (FindByIDsReq)   returns (FindResp);
+  rpc UpdateStock     (UpdateStockReq) returns (GoodsEmpty);
+  rpc UpdateStockBack (UpdateStockReq) returns (GoodsEmpty);
+  rpc SearchGoods     (SearchGoodsReq) returns (SearchGoodsResp);
+}
+
+message Good {
+  int64  ID    = 10;
+  string Name  = 20;
+  double Price = 30;
+  int64  Stock = 40;
+}
+
+message GoodsStock {
+  int64 ID    = 10;
+  int64 Stock = 20;
+}
+
+message AddReq {
+  Good good = 10;
+}
+
+message UpdateReq {
+  Good good = 10;
+}
+
+message GetReq {
+  int64 id = 10;
+}
+
+message GetResp {
+  Good good = 10;
+}
+
+message DeleteReq {
+  int64 id = 10;
+}
+
+message FindReq {
+  int64 Offset = 10;
+  int64 Limit  = 20;
+}
+
+message FindResp {
+  repeated Good goods = 10;
+}
+
+message FindByIDsReq {
+  repeated int64 IDs = 10;
+}
+
+message UpdateStockReq {
+  repeated GoodsStock goods = 10;
+  string GID = 20;
+}
+
+message SearchGoodsReq {
+  string content = 10;
+  int64 offset = 20;
+  int64 limit = 30;
+}
+
+message SearchGoodsResp {
+  repeated Good goods = 10;
+}
+
+message GoodsEmpty {}

@@ -1,0 +1,91 @@
+syntax = "v1"
+
+@server (
+	middleware: AgentMiddleware
+	group : usercenter
+)
+service gateway-api {
+	@handler register
+	post /user/register (RegisterReq) returns (Response)
+}
+
+@server (
+	middleware: AgentMiddleware
+	group : goods
+)
+service gateway-api {
+	@handler addGood
+	post /good/add (AddGoodReq) returns (Response)
+	@handler updateGood
+	put /good/update (UpdateGoodReq) returns (Response)
+	@handler getGood
+	get /good/get (GetGoodReq) returns (Response)
+	@handler deleteGood
+	delete /good/delete (DeleteGoodReq) returns (Response)
+	@handler findGoods
+	get /good/find (FindGoodsReq) returns (Response)
+	@handler searchGoods
+	get /good/search (SearchGoodsReq) returns (Response)
+}
+
+@server (
+	middleware: AgentMiddleware
+	group : order
+)
+service gateway-api {
+	@handler createOrder
+	post /order/create (CreateOrderReq) returns (Response)
+	@handler updateOrderStatus
+	post /order/update
+}
+
+// User Center
+type (
+	RegisterReq {
+		Nickname string `json:"nickname"`
+		Mobile   string `json:"mobile"`
+		Password string `json:"password"`
+	}
+)
+// Good
+type (
+	AddGoodReq {
+		Name  string  `json:"name"`
+		Price float64 `json:"price"`
+		Stock int64   `json:"stock"`
+	}
+	SearchGoodsReq {
+		Content string `json:"content"`
+		Limit   int64  `json:"limit"`
+		Offset  int64  `json:"offset"`
+	}
+	UpdateGoodReq {
+	}
+	GetGoodReq {
+		Id int64 `json:"id"`
+	}
+	DeleteGoodReq {
+		Id int64 `json:"id"`
+	}
+	FindGoodsReq {
+		Limit  int64 `json:"limit"`
+		Offset int64 `json:"offset"`
+	}
+)
+// Order
+type (
+	GoodsList {
+		Id       int64 `json:"id"`
+		Quantity int64 `json:"quantity"`
+	}
+	CreateOrderReq {
+		UID   int64       `json:"uid"`
+		Goods []GoodsList `json:"goods"`
+	}
+)
+
+type Response {
+	Code int         `json:"code"`
+	Msg  string      `json:"msg"`
+	Data interface{} `json:"data"`
+}
