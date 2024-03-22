@@ -34,6 +34,11 @@ $ docker run --name nacos -e MODE=standalone -e JVM_XMS=512m -e JVM_XMX=512m -e 
 $ docker run --name nacos -e MODE=standalone -e JVM_XMS=512m -e JVM_XMX=512m -e JVM_XMN=256m -p 8848:8848 -p 9848:9848 -p 9849:9849 -d nacos/nacos-server-m1:2.0.3
 ```
 
+#### MinIO:(`xxx`是映射到你本地的文件路径)
+```shell
+$ docker run -p 9000:9000 -p 9001:9001 --name minio -d --restart=always -e "MINIO_ACCESS_KEY=minioadmin" -e "MINIO_SECRET_KEY=minioadmin" -v xxx:/data -v xxx:/root/.minio minio/minio server /data --console-address ":9001" -address ":9000"
+```
+
 #### ElasticSearch:
 1. 安装`elasticsearch:7.17.6`并运行
 ```shell

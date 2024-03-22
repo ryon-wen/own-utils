@@ -25,13 +25,19 @@ $ docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=xxx -d mysql:lates
 $ docker run --name redis -p 6379:6379 -d redis:latest
 ```
 
-#### Nacos:
+#### Nacos: 
+```unsupport macOS (Apple Silicon)```
 ```shell
 $ docker run --name nacos -e MODE=standalone -e JVM_XMS=512m -e JVM_XMX=512m -e JVM_XMN=256m -p 8848:8848 -p 9848:9848 -p 9849:9849 -d nacos/nacos-server:latest
 ```
-Only for `macOS (Apple Silicon)`
+```support macOS (Apple Silicon)```
 ```shell
 $ docker run --name nacos -e MODE=standalone -e JVM_XMS=512m -e JVM_XMX=512m -e JVM_XMN=256m -p 8848:8848 -p 9848:9848 -p 9849:9849 -d nacos/nacos-server-m1:2.0.3
+```
+
+#### MinIO:(`xxx` is your local path)
+```shell
+$ docker run -p 9000:9000 -p 9001:9001 --name minio -d --restart=always -e "MINIO_ACCESS_KEY=minioadmin" -e "MINIO_SECRET_KEY=minioadmin" -v xxx:/data -v xxx:/root/.minio minio/minio server /data --console-address ":9001" -address ":9000"
 ```
 
 #### ElasticSearch:
