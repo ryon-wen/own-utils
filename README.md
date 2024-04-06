@@ -32,7 +32,7 @@ $ docker run --name nacos -e MODE=standalone -e JVM_XMS=512m -e JVM_XMX=512m -e 
 ```
 ```support macOS (Apple Silicon)```
 ```shell
-$ docker run --name nacos -e MODE=standalone -e JVM_XMS=512m -e JVM_XMX=512m -e JVM_XMN=256m -p 8848:8848 -p 9848:9848 -p 9849:9849 -d nacos/nacos-server-m1:2.0.3
+$ docker run --name nacos -e MODE=standalone -e JVM_XMS=512m -e JVM_XMX=512m -e JVM_XMN=256m -p 8848:8848 -p 9848:9848 -p 9849:9849 -d zhusaidong/nacos-server-m1:2.0.3
 ```
 
 #### MinIO:(`xxx` is your local path)
